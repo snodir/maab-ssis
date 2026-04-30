@@ -1,0 +1,1 @@
+dtexec /f "d:\SSIS Projects\SSISwithBek(10-25)\SSISwithBek(10-25)\SSISscheduling.dtsx"

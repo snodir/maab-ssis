@@ -1,0 +1,738 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/17/2022 3:35:41 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-20RAN2E"
+  DTS:CreatorName="DESKTOP-20RAN2E\NODIR"
+  DTS:DTSID="{BA2060BD-B84F-4DC2-AD10-3C67BB174D4D}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.180"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="SCDtype2WithStagingMergeSQLstatement"
+  DTS:PackageType="5"
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{3EC8D113-95F0-4C2F-92C6-D3B11D276F35}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-20RAN2E.OLAP]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{220FF6E2-E072-4D7B-86DD-3309C4476AED}"
+      DTS:ObjectName="DESKTOP-20RAN2E.OLAP">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-20RAN2E;Initial Catalog=OLAP;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-20RAN2E.OLTPvsOLAP]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{A3D02AC0-CFFE-4269-9263-E52572DE22C2}"
+      DTS:ObjectName="DESKTOP-20RAN2E.OLTPvsOLAP">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-20RAN2E;Initial Catalog=OLTPvsOLAP;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{62FE7FFC-A21F-4C1E-A9BB-756BF8B1F392}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="currentdate">
+      <DTS:VariableValue
+        DTS:DataType="7">4/17/2022 4:03:55 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2B7531FB-089A-4D30-AB60-6C3CB5B1F3FB}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="last_success_load">
+      <DTS:VariableValue
+        DTS:DataType="7">4/17/2022 4:03:44 PM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\get last load and current date"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{e71c939d-2915-49d0-948b-22bd8d04ad2f}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="get last load and current date"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{220FF6E2-E072-4D7B-86DD-3309C4476AED}"
+          SQLTask:SqlStatementSource="select last_successful_loaddate, getdate() as currentdate from audit_exec_log"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::last_success_load" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="1"
+            SQLTask:DtsVariableName="User::currentdate" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\load to staging table"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{dcac6106-b978-416a-b44a-34088e98f42a}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="load to staging table"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\load to staging table\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[stg_student]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\load to staging table\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-20RAN2E.OLAP]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-20RAN2E.OLAP]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\load to staging table\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\load to staging table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[id]"
+                      cachedDataType="i4"
+                      cachedName="id"
+                      externalMetadataColumnId="Package\load to staging table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      lineageId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].Columns[id]" />
+                    <inputColumn
+                      refId="Package\load to staging table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="name"
+                      externalMetadataColumnId="Package\load to staging table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                      lineageId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]" />
+                    <inputColumn
+                      refId="Package\load to staging table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[curr_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="curr_date"
+                      externalMetadataColumnId="Package\load to staging table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[load_date]"
+                      lineageId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].Columns[curr_date]" />
+                    <inputColumn
+                      refId="Package\load to staging table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[city]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="city"
+                      externalMetadataColumnId="Package\load to staging table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                      lineageId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].Columns[city]" />
+                    <inputColumn
+                      refId="Package\load to staging table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[phone_num]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="phone_num"
+                      externalMetadataColumnId="Package\load to staging table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[phonenumstaging]"
+                      lineageId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].Columns[phone_num]" />
+                    <inputColumn
+                      refId="Package\load to staging table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[hash_values]"
+                      cachedDataType="nText"
+                      cachedName="hash_values"
+                      externalMetadataColumnId="Package\load to staging table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[hash_value]"
+                      lineageId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].Columns[hash_values]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\load to staging table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\load to staging table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\load to staging table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="city" />
+                    <externalMetadataColumn
+                      refId="Package\load to staging table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[load_date]"
+                      dataType="dbTimeStamp"
+                      name="load_date" />
+                    <externalMetadataColumn
+                      refId="Package\load to staging table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[phonenumstaging]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="phonenumstaging" />
+                    <externalMetadataColumn
+                      refId="Package\load to staging table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[hash_value]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="hash_value" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\load to staging table\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\load to staging table\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\load to staging table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\load to staging table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\load to staging table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\load to staging table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\load to staging table\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select id, name, city, getdate() as curr_date, phone_num,
+convert(varchar(32), substring(master.dbo.fn_varbintohexstr(HASHBYTES('SHA2_256', concat(ltrim(rtrim(city)), ltrim(rtrim(phone_num))))),3,32)) AS hash_values
+ from student
+where modified_date&gt;=?</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0:Input",{2B7531FB-089A-4D30-AB60-6C3CB5B1F3FB};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\load to staging table\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-20RAN2E.OLTPvsOLAP]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-20RAN2E.OLTPvsOLAP]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].Columns[id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[id]"
+                      lineageId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].Columns[id]"
+                      name="id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      length="50"
+                      lineageId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]"
+                      name="name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].Columns[city]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                      length="50"
+                      lineageId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].Columns[city]"
+                      name="city"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].Columns[curr_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[curr_date]"
+                      lineageId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].Columns[curr_date]"
+                      name="curr_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].Columns[phone_num]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[phone_num]"
+                      length="50"
+                      lineageId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].Columns[phone_num]"
+                      name="phone_num"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].Columns[hash_values]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[hash_values]"
+                      lineageId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].Columns[hash_values]"
+                      name="hash_values"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="city" />
+                    <externalMetadataColumn
+                      refId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[curr_date]"
+                      dataType="dbTimeStamp"
+                      name="curr_date" />
+                    <externalMetadataColumn
+                      refId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[phone_num]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="phone_num" />
+                    <externalMetadataColumn
+                      refId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[hash_values]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="hash_values" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[id]"
+                      dataType="i4"
+                      lineageId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[id]"
+                      name="id" />
+                    <outputColumn
+                      refId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[name]"
+                      name="name" />
+                    <outputColumn
+                      refId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[city]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[city]"
+                      name="city" />
+                    <outputColumn
+                      refId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[curr_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[curr_date]"
+                      name="curr_date" />
+                    <outputColumn
+                      refId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[phone_num]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[phone_num]"
+                      name="phone_num" />
+                    <outputColumn
+                      refId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[hash_values]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      lineageId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[hash_values]"
+                      name="hash_values" />
+                    <outputColumn
+                      refId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\load to staging table.Paths[OLE DB Source Output]"
+              endId="Package\load to staging table\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\load to staging table\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\merge stageing with dim tbl"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{71b76bb0-8def-4204-9292-fdb87aebd096}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="merge stageing with dim tbl"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{220FF6E2-E072-4D7B-86DD-3309C4476AED}"
+          SQLTask:SqlStatementSource="declare @currentdate datetime=getdate()&#xA;insert into OLAP.dbo.dim_student(st_Alt_Business_Nat_key, name, city, startdate, phonenumdim, hash_value_dim)&#xA;select id, name, city, @currentdate, phonenumstaging, hash_value from &#xA;(&#xA;merge OLAP.dbo.dim_student as targett&#xA;using [OLAP].[dbo].[stg_student] as src&#xA;on targett.st_Alt_Business_Nat_key=src.id&#xA;when not matched then&#xA;insert (st_Alt_Business_Nat_key, name, city, startdate, phonenumdim, hash_value_dim) values(src.id, src.name, src.city, @currentdate, src.phonenumstaging, src.hash_value)&#xA;when matched and targett.hash_value_dim&lt;&gt;src.hash_value then&#xA;update set targett.endddate=getdate()&#xA;output $action as actionn, src.*&#xA;) as mergeoutput where mergeoutput.actionn='update'&#xA;&#xA;&#xA;update audit_exec_log&#xA;set last_successful_loaddate=?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::currentdate"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="7"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\truncate staging table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{382c3afa-264b-483a-aa5e-49a5cb478def}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="truncate staging table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{220FF6E2-E072-4D7B-86DD-3309C4476AED}"
+          SQLTask:SqlStatementSource="truncate table stg_student" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{2b9c410a-6096-49d8-bd94-836dc4d34c9e}"
+      DTS:From="Package\get last load and current date"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\truncate staging table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{84047153-4772-4c93-9223-923fe0aaac80}"
+      DTS:From="Package\load to staging table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\merge stageing with dim tbl" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{c13af435-8ce9-45e4-9a15-ab48822df1c3}"
+      DTS:From="Package\truncate staging table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\load to staging table" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="221,42"
+          Id="Package\get last load and current date"
+          TopLeft="204,89" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\load to staging table"
+          TopLeft="227,260" />
+        <NodeLayout
+          Size="213,42"
+          Id="Package\merge stageing with dim tbl"
+          TopLeft="211.5,360.5" />
+        <NodeLayout
+          Size="184,42"
+          Id="Package\truncate staging table"
+          TopLeft="225.5,163.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="316,131">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.5"
+              Start="0,0"
+              End="0,25">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="316.75,302">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58.5"
+              Start="0,0"
+              End="0,51">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="316.5,205.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54.5"
+              Start="0,0"
+              End="0,47">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\load to staging table">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="157,42"
+          Id="Package\load to staging table\OLE DB Source"
+          TopLeft="133.5,53.5" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\load to staging table\OLE DB Destination"
+          TopLeft="126.5,228.5" />
+        <EdgeLayout
+          Id="Package\load to staging table.Paths[OLE DB Source Output]"
+          TopLeft="213.5,95.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,133"
+              Start="0,0"
+              End="0,125.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,125.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\load to staging table\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\load to staging table\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

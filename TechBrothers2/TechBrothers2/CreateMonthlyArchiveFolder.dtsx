@@ -1,0 +1,92 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/14/2022 9:36:29 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-20RAN2E"
+  DTS:CreatorName="DESKTOP-20RAN2E\NODIR"
+  DTS:DTSID="{9663194E-EBAD-44EF-9FD2-13B7DC6D1EBE}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.180"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="CreateMonthlyArchiveFolder"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{AD2B5E07-B32F-40BB-9A40-C84FA93B9A9D}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7ED8852D-8EDA-4647-B53A-F327B391D246}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="main_folder">
+      <DTS:VariableValue
+        DTS:DataType="8">d:\archive_folder\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F928A4DE-5B6A-44FE-8885-118E21B3A171}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="month(getdate()) == 1 ? &quot;Jan&quot; :&#xA;month(getdate()) == 2 ? &quot;Feb&quot; :&#xA;&#xA;&#xA;month(getdate()) == 3 ? &quot;Mar&quot; :&#xA;&#xA;&#xA;month(getdate()) == 4 ? &quot;Apr&quot; :&#xA;&#xA;&#xA;month(getdate()) == 5 ? &quot;Mai&quot; :&#xA;&#xA;&#xA;month(getdate()) == 6 ? &quot;Jun&quot; :&#xA;&#xA;&#xA;month(getdate()) == 7 ? &quot;Jul&quot; :&#xA;&#xA;&#xA;month(getdate()) == 8 ? &quot;Aug&quot; :&#xA;&#xA;&#xA;month(getdate()) == 9 ? &quot;Sep&quot; :&#xA;&#xA;&#xA;month(getdate()) == 10 ? &quot;Oct&quot; :&#xA;&#xA;&#xA;month(getdate()) == 11 ? &quot;Nov&quot; : &quot;Dec&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="month_name">
+      <DTS:VariableValue
+        DTS:DataType="8">Mar</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8D60E9A6-CB43-4FE1-B08A-6BDA62FBDEB3}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::main_folder] + replace( left((DT_WSTR, 50)getdate(), 4), &quot;-&quot;, &quot;_&quot;)+&quot;_&quot;+ @[User::month_name]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="new_folder">
+      <DTS:VariableValue
+        DTS:DataType="8">d:\archive_folder\2022_Mar</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\File System Task"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{29BA0E1B-DAB7-47A6-A614-F184DF0AA504}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="File System Task"
+      DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="CreateDirectory"
+          TaskOverwriteDestFile="True"
+          TaskSourcePath="User::new_folder"
+          TaskIsSourceVariable="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="163,42"
+          Id="Package\File System Task"
+          TopLeft="123.5,73.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

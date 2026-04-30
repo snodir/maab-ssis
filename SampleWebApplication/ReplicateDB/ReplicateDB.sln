@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33214.272
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "ReplicateDB", "ReplicateDB\ReplicateDB.dtproj", "{3FF74A7E-4E99-484C-9DCC-795100FBC19D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3FF74A7E-4E99-484C-9DCC-795100FBC19D}.Development|Default.ActiveCfg = Development
+		{3FF74A7E-4E99-484C-9DCC-795100FBC19D}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C222C915-6AAF-43DA-89F5-1162E76D5B71}
+	EndGlobalSection
+EndGlobal

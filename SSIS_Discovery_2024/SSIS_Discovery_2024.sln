@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33920.266
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "SSIS_Discovery_2024", "SSIS_Discovery_2024\SSIS_Discovery_2024.dtproj", "{7C6233B6-4C9B-43A8-ABD0-75152D4F9DFF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C6233B6-4C9B-43A8-ABD0-75152D4F9DFF}.Development|Default.ActiveCfg = Development
+		{7C6233B6-4C9B-43A8-ABD0-75152D4F9DFF}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1644608A-E95A-40B7-9F59-C4F77B321BE5}
+	EndGlobalSection
+EndGlobal

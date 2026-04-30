@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/11/2022 11:33:28 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-20RAN2E"
+  DTS:CreatorName="DESKTOP-20RAN2E\NODIR"
+  DTS:DTSID="{F9A2AF65-DB0E-472F-BBCC-DB6C7A7264B8}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.180"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="ExecuteMultipleSqlFilesUsingSSIS"
+  DTS:PackageType="5"
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{0C29A396-7B48-4946-AC9B-FFACE2AF050B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Conn_SQLfile]"
+      DTS:CreationName="FILE"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{012CEC5C-9D0E-4165-A9CF-9F9039C9D4A9}"
+      DTS:ObjectName="Conn_SQLfile">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::script_folderpath]+ @[User::file_name]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="d:\SQL Server Management Studio\T-SQL Fundamentals\" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-20RAN2E.TechBrothers]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F2782A5D-AC1D-498B-98A2-E257D6619E6B}"
+      DTS:ObjectName="DESKTOP-20RAN2E.TechBrothers">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-20RAN2E;Initial Catalog=TechBrothers;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7ADAD4E6-E857-4CD2-AFAD-166148C4F70D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="file_name">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5C9C4C61-5641-42E9-99B6-7A3D610A6A0C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="script_folderpath">
+      <DTS:VariableValue
+        DTS:DataType="8">d:\SQL Server Management Studio\T-SQL Fundamentals\</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:DelayValidation="True"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{70E90E90-DF36-4A98-971B-6E726781A098}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{24869A0C-43A4-4749-9736-1CD2EE27005C}"
+        DTS:ObjectName="{24869A0C-43A4-4749-9736-1CD2EE27005C}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[User::script_folderpath]</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="d:\SQL Server Management Studio\T-SQL Fundamentals\" />
+            <FEFEProperty
+              FileSpec="script*.sql" />
+            <FEFEProperty
+              FileNameRetrievalType="1" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Execute SQL Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{5C9FDB4C-C0B7-4DBF-B5E0-1DD2542CF0AB}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute SQL Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F2782A5D-AC1D-498B-98A2-E257D6619E6B}"
+              SQLTask:SqlStmtSourceType="FileConnection"
+              SQLTask:SqlStatementSource="Conn_SQLfile" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{79BD3DC8-BECC-4B6B-85A0-142B9FCE4ED6}"
+          DTS:ObjectName="{79BD3DC8-BECC-4B6B-85A0-142B9FCE4ED6}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::file_name" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Foreach Loop Container\Execute SQL Task"
+          TopLeft="58,31" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="297,157"
+          Size="297,200"
+          Id="Package\Foreach Loop Container"
+          TopLeft="198,66" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
