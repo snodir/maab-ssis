@@ -1,0 +1,1096 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/12/2025 1:48:17 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-20RAN2E"
+  DTS:CreatorName="DESKTOP-20RAN2E\NODIR"
+  DTS:DTSID="{8322DC3A-A623-44FC-A9D8-5BF328E0AA4E}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.2"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="27"
+  DTS:VersionGUID="{2C9C56EB-F01D-4D1C-B1EE-955F608703A2}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-20RAN2E\MSSQLSERVER01.Legacy]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E6252D92-2676-41B9-A209-2AFCF40018C4}"
+      DTS:ObjectName="DESKTOP-20RAN2E\MSSQLSERVER01.Legacy">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-20RAN2E\MSSQLSERVER01;Initial Catalog=Legacy;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{E6252D92-2676-41B9-A209-2AFCF40018C4}DESKTOP-20RAN2E\MSSQLSERVER01.Legacy;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{FA464798-94F8-4E89-8B3C-F893F8A84804}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::vDestFilePath] + @[User::vFilePrefix] + (DT_STR, 10, 1252)@[User::vClientID] + " - " + @[User::vClientName] + ".csv"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="2057"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="D:\BackupJobIssues\DIS_LegacyMedical\DataForJonathan\IVR\IVR Data ClientID_3755 - ADVANCED WOUND THERAPY.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="87"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FolderName"
+              DTS:DTSID="{D2FEF0AC-1E15-45AF-B39F-F5855A115F6D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="87"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FileName"
+              DTS:DTSID="{49D2CA52-4B1C-4445-B10D-FB9B32EC430B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IVRID"
+              DTS:DTSID="{F903B499-908D-4131-B82C-AD6A6788F0AE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IVRDate"
+              DTS:DTSID="{0CC88F47-CA2B-4039-800B-C3A8BAB5F20C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ClientID"
+              DTS:DTSID="{327F3291-932C-4007-A9E6-CDD45EEE95CF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ClientName"
+              DTS:DTSID="{8370040E-0A6F-4205-907D-578158444B0B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PhysicianID"
+              DTS:DTSID="{79BB587A-FD26-42B1-886F-8846CF45807F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PhyLast"
+              DTS:DTSID="{7B8AF1A6-1312-43E6-BA73-AA68FD516B4C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PhyFrist"
+              DTS:DTSID="{6F0C6DD4-D1AE-461A-A1B1-2B89AE01659A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PatientID"
+              DTS:DTSID="{5122E5E9-EC05-4135-BC4D-860920D9302E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MEDRECNUM"
+              DTS:DTSID="{34C69491-9C05-4D76-A0BF-005CE8A90356}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PatientLast"
+              DTS:DTSID="{CBF07280-119D-4A6D-A473-5A20B30EAA2D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PatientFirst"
+              DTS:DTSID="{8EA49F4B-5ADE-4141-AAEA-5931D4A26494}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="133"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PatientDOB"
+              DTS:DTSID="{44D04675-BFA6-4795-99CB-FA722B2383C2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Document"
+              DTS:DTSID="{0CF48893-A5FE-412C-8EE1-27F2E5612109}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="87"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="pdfSource"
+              DTS:DTSID="{544CCFCA-867A-49E3-B6F0-F0A42D06DF3E}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{477F216C-CBAB-44F1-94C0-0EE5D78AAEFB}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vClientID">
+      <DTS:VariableValue
+        DTS:DataType="3">3755</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{994BFBDF-BBBB-42FC-84C4-E4BE526A5F58}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="vClientName">
+      <DTS:VariableValue
+        DTS:DataType="8">ADVANCED WOUND THERAPY</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D2FDEFE6-30DC-4A14-A38D-B6C8375DD2EC}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vClientsTable">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F4D1FF3D-2F87-4B04-807B-A94E207D23E8}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="vDestFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">D:\BackupJobIssues\DIS_LegacyMedical\DataForJonathan\IVR\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8A80863B-1EA8-4886-B539-764E0EC89451}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="vFilePrefix">
+      <DTS:VariableValue
+        DTS:DataType="8">IVR Data ClientID_</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{42082E56-32BE-4A28-AB5C-22358727C2C7}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="vNowOutput">
+      <DTS:VariableValue
+        DTS:DataType="7">9/12/2025</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{604F0D72-85A6-4125-AAA4-2D513732BFF6}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E6252D92-2676-41B9-A209-2AFCF40018C4}"
+          SQLTask:SqlStatementSource="SELECT ID as ClientID, [Name] as ClientName&#xA;FROM dbo.Client&#xA;WHERE ID in (&#xA;3755,&#xA;2254,&#xA;3504,&#xA;2343,&#xA;3759,&#xA;3465,&#xA;2388,&#xA;3500,&#xA;2194,&#xA;3910,&#xA;2336,&#xA;2259,&#xA;1697,&#xA;2242,&#xA;1960,&#xA;1942,&#xA;1870,&#xA;3899,&#xA;3832,&#xA;3850,&#xA;3921,&#xA;1645,&#xA;1644,&#xA;3926,&#xA;3896,&#xA;3894,&#xA;3855,&#xA;3871,&#xA;3901,&#xA;3895,&#xA;2299,&#xA;3507,&#xA;3885,&#xA;3928,&#xA;3922,&#xA;3911,&#xA;2058,&#xA;2282,&#xA;3920,&#xA;3856,&#xA;3571,&#xA;3873,&#xA;3925&#xA;);"
+          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::vClientsTable" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\LoopThroughClients"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{1DF49353-9F4F-411F-A70A-4F59BA2021ED}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="LoopThroughClients">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{42B80F55-2B85-47BB-A418-9186D88CEFC3}"
+        DTS:ObjectName="{42B80F55-2B85-47BB-A418-9186D88CEFC3}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::vClientsTable" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\LoopThroughClients\Data Flow Task"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{AF0EFAB4-84DD-4885-A03E-07BAE16B5E4B}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Data Flow Task"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\LoopThroughClients\Data Flow Task\IVRFile"
+                  componentClassID="Microsoft.FlatFileDestination"
+                  contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Destination"
+                  localeId="2057"
+                  name="IVRFile"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether the data will overwrite or append to the destination file."
+                      name="Overwrite">true</property>
+                    <property
+                      dataType="System.Null"
+                      description="Specifies the text to write to the destination file before any data is written."
+                      expressionType="Notify"
+                      name="Header" />
+                    <property
+                      dataType="System.Boolean"
+                      description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                      name="EscapeQualifier">false</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                      connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input]"
+                      hasSideEffects="true"
+                      name="Flat File Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].Columns[FolderName]"
+                          cachedDataType="wstr"
+                          cachedLength="87"
+                          cachedName="FolderName"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[FolderName]"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[FolderName]" />
+                        <inputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].Columns[FileName]"
+                          cachedDataType="wstr"
+                          cachedLength="87"
+                          cachedName="FileName"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[FileName]"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[FileName]" />
+                        <inputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].Columns[IVRID]"
+                          cachedDataType="i4"
+                          cachedName="IVRID"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[IVRID]"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IVRID]" />
+                        <inputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].Columns[IVRDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="IVRDate"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[IVRDate]"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IVRDate]" />
+                        <inputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].Columns[ClientID]"
+                          cachedDataType="i4"
+                          cachedName="ClientID"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[ClientID]"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClientID]" />
+                        <inputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].Columns[ClientName]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="ClientName"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[ClientName]"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClientName]" />
+                        <inputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].Columns[PhysicianID]"
+                          cachedDataType="i4"
+                          cachedName="PhysicianID"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[PhysicianID]"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhysicianID]" />
+                        <inputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].Columns[PhyLast]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="PhyLast"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[PhyLast]"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhyLast]" />
+                        <inputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].Columns[PhyFrist]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="PhyFrist"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[PhyFrist]"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhyFrist]" />
+                        <inputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].Columns[PatientID]"
+                          cachedDataType="i4"
+                          cachedName="PatientID"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[PatientID]"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PatientID]" />
+                        <inputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].Columns[MEDRECNUM]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="MEDRECNUM"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[MEDRECNUM]"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[MEDRECNUM]" />
+                        <inputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].Columns[PatientLast]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="PatientLast"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[PatientLast]"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PatientLast]" />
+                        <inputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].Columns[PatientFirst]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="PatientFirst"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[PatientFirst]"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PatientFirst]" />
+                        <inputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].Columns[PatientDOB]"
+                          cachedDataType="dbDate"
+                          cachedName="PatientDOB"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[PatientDOB]"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PatientDOB]" />
+                        <inputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].Columns[Document]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Document"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[Document]"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Document]" />
+                        <inputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].Columns[pdfSource]"
+                          cachedDataType="wstr"
+                          cachedLength="87"
+                          cachedName="pdfSource"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[pdfSource]"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[pdfSource]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[FolderName]"
+                          dataType="wstr"
+                          length="87"
+                          name="FolderName" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[FileName]"
+                          dataType="wstr"
+                          length="87"
+                          name="FileName" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[IVRID]"
+                          dataType="i4"
+                          name="IVRID" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[IVRDate]"
+                          dataType="dbTimeStamp"
+                          name="IVRDate" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[ClientID]"
+                          dataType="i4"
+                          name="ClientID" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[ClientName]"
+                          dataType="wstr"
+                          length="50"
+                          name="ClientName" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[PhysicianID]"
+                          dataType="i4"
+                          name="PhysicianID" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[PhyLast]"
+                          dataType="wstr"
+                          length="50"
+                          name="PhyLast" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[PhyFrist]"
+                          dataType="wstr"
+                          length="50"
+                          name="PhyFrist" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[PatientID]"
+                          dataType="i4"
+                          name="PatientID" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[MEDRECNUM]"
+                          dataType="wstr"
+                          length="50"
+                          name="MEDRECNUM" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[PatientLast]"
+                          dataType="wstr"
+                          length="50"
+                          name="PatientLast" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[PatientFirst]"
+                          dataType="wstr"
+                          length="50"
+                          name="PatientFirst" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[PatientDOB]"
+                          dataType="dbDate"
+                          name="PatientDOB" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[Document]"
+                          dataType="wstr"
+                          length="50"
+                          name="Document" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input].ExternalColumns[pdfSource]"
+                          dataType="wstr"
+                          length="87"
+                          name="pdfSource" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                </component>
+                <component
+                  refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT    LEFT(pdfSource, LEN(pdfSource) - CHARINDEX('\', REVERSE(pdfSource))) AS FolderName, RIGHT(pdfSource, CHARINDEX('\', REVERSE(pdfSource)) - 1) AS FileName, IVRID, IVRDate, ClientID, ClientName, 
+                      PhysicianID, PhyLast, PhyFrist, PatientID, MEDRECNUM, PatientLast, PatientFirst, PatientDOB, Document, pdfSource
+FROM         ExportIVRScans
+WHERE     (1 = 1) AND (ClientID = ?) AND (CAST(IVRDate AS date) BETWEEN '2025-07-01' AND CAST(GETDATE() AS date))
+ORDER BY IVRDate DESC</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping">"pID:Input",{477F216C-CBAB-44F1-94C0-0EE5D78AAEFB};</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[DESKTOP-20RAN2E\MSSQLSERVER01.Legacy]"
+                      connectionManagerRefId="Package.ConnectionManagers[DESKTOP-20RAN2E\MSSQLSERVER01.Legacy]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[FolderName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FolderName]"
+                          length="87"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[FolderName]"
+                          name="FolderName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[FileName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FileName]"
+                          length="87"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[FileName]"
+                          name="FileName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IVRID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IVRID]"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IVRID]"
+                          name="IVRID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IVRDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IVRDate]"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IVRDate]"
+                          name="IVRDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClientID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ClientID]"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClientID]"
+                          name="ClientID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClientName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ClientName]"
+                          length="50"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClientName]"
+                          name="ClientName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhysicianID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PhysicianID]"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhysicianID]"
+                          name="PhysicianID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhyLast]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PhyLast]"
+                          length="50"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhyLast]"
+                          name="PhyLast"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhyFrist]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PhyFrist]"
+                          length="50"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhyFrist]"
+                          name="PhyFrist"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PatientID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PatientID]"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PatientID]"
+                          name="PatientID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[MEDRECNUM]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MEDRECNUM]"
+                          length="50"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[MEDRECNUM]"
+                          name="MEDRECNUM"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PatientLast]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PatientLast]"
+                          length="50"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PatientLast]"
+                          name="PatientLast"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PatientFirst]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PatientFirst]"
+                          length="50"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PatientFirst]"
+                          name="PatientFirst"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PatientDOB]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PatientDOB]"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PatientDOB]"
+                          name="PatientDOB"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Document]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Document]"
+                          length="50"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Document]"
+                          name="Document"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[pdfSource]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[pdfSource]"
+                          length="87"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[pdfSource]"
+                          name="pdfSource"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FolderName]"
+                          dataType="wstr"
+                          length="87"
+                          name="FolderName" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FileName]"
+                          dataType="wstr"
+                          length="87"
+                          name="FileName" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IVRID]"
+                          dataType="i4"
+                          name="IVRID" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IVRDate]"
+                          dataType="dbTimeStamp"
+                          name="IVRDate" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ClientID]"
+                          dataType="i4"
+                          name="ClientID" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ClientName]"
+                          dataType="wstr"
+                          length="50"
+                          name="ClientName" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PhysicianID]"
+                          dataType="i4"
+                          name="PhysicianID" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PhyLast]"
+                          dataType="wstr"
+                          length="50"
+                          name="PhyLast" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PhyFrist]"
+                          dataType="wstr"
+                          length="50"
+                          name="PhyFrist" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PatientID]"
+                          dataType="i4"
+                          name="PatientID" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MEDRECNUM]"
+                          dataType="wstr"
+                          length="50"
+                          name="MEDRECNUM" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PatientLast]"
+                          dataType="wstr"
+                          length="50"
+                          name="PatientLast" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PatientFirst]"
+                          dataType="wstr"
+                          length="50"
+                          name="PatientFirst" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PatientDOB]"
+                          dataType="dbDate"
+                          name="PatientDOB" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Document]"
+                          dataType="wstr"
+                          length="50"
+                          name="Document" />
+                        <externalMetadataColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[pdfSource]"
+                          dataType="wstr"
+                          length="87"
+                          name="pdfSource" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FolderName]"
+                          dataType="wstr"
+                          length="87"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FolderName]"
+                          name="FolderName" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FileName]"
+                          dataType="wstr"
+                          length="87"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FileName]"
+                          name="FileName" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IVRID]"
+                          dataType="i4"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IVRID]"
+                          name="IVRID" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IVRDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IVRDate]"
+                          name="IVRDate" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ClientID]"
+                          dataType="i4"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ClientID]"
+                          name="ClientID" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ClientName]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ClientName]"
+                          name="ClientName" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PhysicianID]"
+                          dataType="i4"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PhysicianID]"
+                          name="PhysicianID" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PhyLast]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PhyLast]"
+                          name="PhyLast" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PhyFrist]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PhyFrist]"
+                          name="PhyFrist" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PatientID]"
+                          dataType="i4"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PatientID]"
+                          name="PatientID" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MEDRECNUM]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MEDRECNUM]"
+                          name="MEDRECNUM" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PatientLast]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PatientLast]"
+                          name="PatientLast" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PatientFirst]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PatientFirst]"
+                          name="PatientFirst" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PatientDOB]"
+                          dataType="dbDate"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PatientDOB]"
+                          name="PatientDOB" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Document]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Document]"
+                          name="Document" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[pdfSource]"
+                          dataType="wstr"
+                          length="87"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[pdfSource]"
+                          name="pdfSource" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\LoopThroughClients\Data Flow Task.Paths[OLE DB Source Output]"
+                  endId="Package\LoopThroughClients\Data Flow Task\IVRFile.Inputs[Flat File Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\LoopThroughClients\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{D5719254-E1D6-410A-A9D2-3D13959B9CF5}"
+          DTS:ObjectName="{D5719254-E1D6-410A-A9D2-3D13959B9CF5}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::vClientID" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{5F1A5367-7BA9-41F8-8410-3FFA92274122}"
+          DTS:ObjectName="{5F1A5367-7BA9-41F8-8410-3FFA92274122}"
+          DTS:ValueIndex="1"
+          DTS:VariableName="User::vClientName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{2F737C36-A972-43F6-B425-EC944B420288}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\LoopThroughClients" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="157.6,64.8"
+          Id="Package\Execute SQL Task"
+          TopLeft="312.857126173165,51.0619044450733" />
+        <NodeLayout
+          Size="150.4,41.6"
+          Id="Package\LoopThroughClients\Data Flow Task"
+          TopLeft="5.5,5.49999999999995" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="161.6,102.4"
+          Size="161.6,145.6"
+          Id="Package\LoopThroughClients"
+          TopLeft="310.857126173165,175.861904445073" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="391.657126173165,115.861904445073">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\LoopThroughClients\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\LoopThroughClients\Data Flow Task\OLE DB Source"
+          TopLeft="14.7,5.49999999999995" />
+        <NodeLayout
+          Size="112.8,41.6"
+          Id="Package\LoopThroughClients\Data Flow Task\IVRFile"
+          TopLeft="5.50000000000001,107.1" />
+        <EdgeLayout
+          Id="Package\LoopThroughClients\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="90.7,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-28.8,59.9999999999999"
+              Start="0,0"
+              End="-28.8,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="-4,30" />
+                  <mssgle:LineSegment
+                    End="-24.8,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-24.8,30"
+                    Point2="-28.8,30"
+                    Point3="-28.8,34" />
+                  <mssgle:LineSegment
+                    End="-28.8,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\LoopThroughClients\Data Flow Task\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
